@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = ".;flight";
+
 service FlightOperator {
   rpc FlightDetails (FlightDetailsRequest) returns (FlightDetailsResponse) {}
   rpc Departures (DeparturesRequest) returns (stream DeparturesResponse) {}
