@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+service FlightOperator {
+  rpc FlightDetails (FlightDetailsRequest) returns (FlightDetailsResponse) {}
+  rpc Departures (DeparturesRequest) returns (stream DeparturesResponse) {}
+  rpc TravelUpdates(stream TravelUpdatesRequest) returns (TravelUpdatesResponse) {}
+  rpc SupportChat(stream SupportChatRequest) returns (stream SupportChatResponse) {}
+}
+
+
+message FlightDetailsRequest {
+  string id = 1;
+}
+
+message FlightDetailsResponse {
+  string id = 1;
+  int32 terminal = 2;
+  Status last_status = 3;
+}
+
+message DeparturesRequest {}
+
+message DeparturesResponse {
+  string id = 1;
+}
+
+message TravelUpdatesRequest {
+  string id = 1;
+  Status last_status = 3;
+}
+
+message TravelUpdatesResponse {}
+
+message SupportChatRequest {
+  string traveler_id = 1;
+  string message = 2;
+}
+
+message SupportChatResponse {
+  string customer_support_id = 1;
+  string message = 2;
+}
+
+enum Status {
+  UNKNOWN = 0;
+  ON_ROUTE = 1;
+  ON_BOARDING = 2;
+  DELAYED = 3;
+  CANCELED = 4;
+  SCHEDULED = 5;
+}
